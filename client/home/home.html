@@ -1,0 +1,108 @@
+<section id="wrapper-home">
+
+    <div class="row">
+        <div class="col-md-3">
+            <h3 ng-if="!home.loggedInUser">Questions</h3>
+            <h3>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#postQuestion" ng-if="!!home.loggedInUser">
+                    <i class="fa fa-plus"></i> &nbsp; Add a Question
+                </button>
+            </h3>
+        </div>
+        <div class="col-md-6 inline">
+            <div class="input-group">
+                <input type="search" name="" id="" placeholder="Find a question..." class="form-control" ng-model="searchBar">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 text-right">
+            <h3>Live Sessions</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6" id="left">
+
+            <div ng-repeat="question in home.questions | orderBy: '-createdOn' | filter:searchBar">
+                <hr>
+                <div class="div-text pointer" ng-click="open = !open">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="negative-margin question-title">{{ question.title }}</h3>
+                            <div ng-hide="open">
+                                <h6>Click to view details</h6>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-hide="!open">
+                    <h5>
+                        <span class="text-default">{{ question.description }}</span>
+                    </h5>
+                    <button class="btn btn-danger" ng-click="open = !open">Cancel</button>
+                    <button type="button" class="btn btn-primary" ng-click="home.answer(question.postedBy)" ng-if="!!home.loggedInUser">Answer</button>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="col-md-6 white" id="right">
+
+            <div ng-repeat="question in home.liveQuestions | orderBy: '-createdOn' | filter: searchBar">
+                <hr>
+                <div class="div-text pointer" ng-click="open = !open">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="negative-margin question-title">{{ question.title }}</h3>
+                            <div ng-hide="open" class="pointer">
+                                <h6>Click to view details</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        <button type="button" class="btn btn-success pull-right" ng-click="home.answer(question.title)" ng-if="!home.inRoom">Join Live Room</button>
+                    </div>
+                    </div>
+
+                </div>
+                <div ng-hide="!open">
+                    <h5 ng-click="open = !open">
+                        <span class="text-default">{{ question.description }}</span>
+                    </h5>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="postQuestion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Post a Question</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" ng-model="home.question.title" placeholder="Title..">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="description" ng-model="home.question.description" placeholder="Description.."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="home.postQuestion(home.question)">Post Question</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

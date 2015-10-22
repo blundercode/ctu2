@@ -1,0 +1,190 @@
+ html body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+}
+
+body {
+    padding-top: 70px;
+}
+
+.peer {
+  border: 1px solid black;
+}
+
+.rts {
+    margin-top: -70px;
+}
+
+.chat-mine {
+    color: blue;
+}
+
+.chat-others {
+    color: black;
+}
+
+/* from style.css */
+#landing_header div h2 {
+  font-size: 24px;
+  padding-left: 20px;
+}
+
+#landing_header .search_header {
+  width: 500px;
+}
+
+#landing_header .search_header md-content input[type="text"] {
+    display: block;
+    margin: 0;
+    padding: 2px;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 18px;
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+}
+
+#landing_header .search_header md-content input[type="text"]:focus {
+    outline: none;
+}
+
+#container {
+  position: relative;
+  border: 1px #ddd solid;
+  height: 180px;
+  overflow-y: auto;
+}
+
+/*#chatbox {
+  position: absolute;
+  bottom: 0px;
+}*/
+
+.action {
+  font-style: italic;
+  color: gray;
+}
+
+.you {
+  font-weight: bold;
+}
+
+#left {
+    max-height: 650px;
+    overflow-y: scroll;
+    /*padding-left: 50px;*/
+}
+
+#right {
+    max-height: 650px;
+    overflow-y: scroll;
+    /*padding-right: 50px;*/
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.negative-margin {
+    margin-top: 0px;
+}
+
+li {
+    font-size: 18px;
+    color: #fff;
+}
+
+.white {
+    background-color: #fff;
+}
+
+.message-box {
+    margin-top: 10px;
+}
+
+.out {
+    border: red 1px solid;
+}
+
+.search_margin {
+    margin-top: 20px;
+}
+
+.inline {
+    margin-top: 20px;
+}
+
+#wrapper-home {
+    padding: 0 50px;
+
+}
+
+.question-title {
+    font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.6em;
+}
+
+/* RTS Room */
+.rts-chrome {
+    margin-top: -70px;
+    display: flex;
+    display: flexbox;
+    flex-flow: column;
+}
+
+.rts-toolbar {
+    order: 1;
+    flex: 1;
+}
+
+.rts-stream {
+    margin-top: -20px;
+    display: flex;
+    display: flexbox;
+    flex-flow: row;
+    order: 2;
+    flex: 1;
+    max-height: calc(100vh - 60px);
+}
+
+.rts-spotlight {
+    background-color: black;
+    order: 1;
+    flex: 8;
+}
+
+.rts-chat {
+    display: flex;
+    display: flexbox;
+    flex-flow: column;
+    order: 2;
+    flex: 2;
+    padding: 10px;
+    border: 1px solid gray;
+}
+
+.rts-peers {
+    background-color: slategray;
+    display: flex;
+    display: flexbox;
+    flex-flow: column;
+    order: 3;
+    flex: 1;
+}
+
+.spotlight {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 60px);
+}
+
+#sendchat {
+    display: none;
+}
+
+.rts-peers > video {
+    width: 90%;
+    margin: 5px auto;
+}

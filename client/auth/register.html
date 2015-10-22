@@ -1,0 +1,46 @@
+<div class='register_modal'>
+  <md-dialog>
+    <form>
+      <!-- header -->
+   		<md-toolbar>
+        <div class="md-toolbar-tools warningHeader">
+          <h2 id='dialogHeader'>Register</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="hide()">
+            <i>x</i>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <!-- Content -->
+      <div layout-padding>
+          <md-content layout-margin>
+              <form name="userForm">
+
+                <div layout layout-sm="column" ng-hide="name">
+                  <md-input-container flex md-no-float>
+                    <input ng-model="user.name" placeholder="Name">
+                  </md-input-container>
+                </div>
+                <md-input-container md-no-float>
+                  <input ng-model="user.email" placeholder="Email">
+                </md-input-container>
+                <md-input-container md-no-float>
+                  <input ng-model="user.username" placeholder="Username">
+                </md-input-container>
+                <md-input-container md-no-float>
+                  <input type="password" ng-model="user.password" placeholder="Password">
+                </md-input-container>
+              </form>
+          </md-content>
+      </div>
+      <!-- Buttons -->
+      <div class="md-actions" layout="row">
+        <span flex></span> <!-- pushes buttons to the right side of the dialog box -->
+        <md-button ng-click="name = !name" class="md-primary">
+          Already Registered
+        </md-button>
+        <md-button class='md-primary' ng-click='register(user)'>Register</md-button>
+      </div>
+    </form>
+  </md-dialog>
+</div>

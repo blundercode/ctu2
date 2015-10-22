@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ctu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="shortcut icon" href="images/CTU.ico">
+    <title>CTU</title>
+
+    <!-- base element for html5mode -->
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/toastr/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="css/team.css" />
+    <link rel="stylesheet" type="text/css" href="css/paper.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <link rel="stylesheet" href="styles/animate.css" />
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+</head>
+
+<body ng-controller="AppController as app" ng-cloak>
+    <nav class="navbar navbar-inverse navbar-fixed-top" ng-hide="$state.includes('rts')">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hamburger" aria-expanded="false">
+                <span class="sr-only">Show Navigation Bar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a ui-sref="home" class="navbar-brand">Home</a>
+        </div>
+        <div class="collapse navbar-collapse" id="hamburger">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="team">Team</a></li>
+            </ul>
+            <ul class="nav navbar-nav pointer pull-right">
+                <li class="navbar-text" ng-if="!!app.loggedInUser">Welcome {{ app.loggedInUser.name }}</li>
+                <li ng-if="!!app.loggedInUser"><a href="#" ng-click="app.logout()">Logout</a></li>
+                <li ng-if="!app.loggedInUser"><a data-toggle="modal" data-target="#register">Register</a></li>
+                <li ng-if="!app.loggedInUser"><a data-toggle="modal" data-target="#login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Views -->
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+    <!-- Register Modal -->
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="registerModal">Register</h4>
+                </div>
+                <form name="registerForm" novalidate>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Full Name:</label>
+                            <input type="text" class="form-control" name="name" ng-model="app.registerData.name" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Email:</label>
+                            <input type="email" class="form-control" id="email" ng-model="app.registerData.email" ng-change="app.updateUsername()">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Username:</label>
+                            <input type="text" class="form-control" id="username" ng-model="app.registerData.username">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password:</label>
+                            <input type="password" class="form-control" id="password" ng-model="app.registerData.password">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Confirm Password:</label>
+                            <input type="password" class="form-control" id="password" ng-model="app.registerData.confirmPassword" ng-change="app.comparePasswords()">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" ng-click="app.register($event)" class="btn btn-primary" data-dismiss="modal" ng-disabled="app.passwordsDontMatch">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal  -->
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="loginModal">Login</h4>
+                </div>
+                <form name="loginForm" novalidate ng-submit="app.login($event)">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="username" ng-model="app.loginData.username" placeholder="username" autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" ng-model="app.loginData.password" placeholder="password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" ng-click="app.login($event)" class="btn btn-primary" data-dismiss="modal">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- libraries -->
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="//cdn.temasys.com.sg/skylink/skylinkjs/0.6.x/skylink.complete.min.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+
+    <!-- application -->
+    <script src="app.js"></script>
+    <script src="common/SkylinkService.js"></script>
+    <script src="AppController.js"></script>
+
+    <!-- Homepage (questions) -->
+    <script src="home/HomeController.js"></script>
+    <script src="searchBar/searchBarCtrl.js"></script>
+
+    <!-- Questions -->
+    <script src="questions/QuestionsService.js"></script>
+
+    <!-- RTS -->
+    <script src="rts/RtsController.js"></script>
+
+    <!-- Auth -->
+    <script src="auth/headerLanding.js"></script>
+    <script src="auth/headerController.js"></script>
+    <script src="auth/dataService.js"></script>
+    <script src="auth/AuthService.js"></script>
+
+    <!-- common services -->
+    <script src="common/NotifierService.js"></script>
+    <script src="common/StorageService.js"></script>
+    <script src="common/DataService.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "ctu",
+  "version": "1.0.0",
+  "description": "Come Teach Us",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://luishrd@bitbucket.org/luishrd/cometeachus.git"
+  },
+  "author": "WebRTC Team DevMountain",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/luishrd/cometeachus#readme",
+  "keywords": [
+    "webrtc"
+  ],
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "bower": "^1.5.2",
+    "cookie-parser": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "express-force-ssl": "^0.3.0",
+    "express-jwt": "^3.1.0",
+    "jsonwebtoken": "^5.0.5",
+    "mongoose": "^4.1.7",
+    "passport": "^0.3.0",
+    "passport-local": "^1.0.0"
+  }
+}
